@@ -73,4 +73,10 @@ public class UserRepositoryMockImpl implements UserRepository {
         return userEntity.getId();
     }
 
+    @Override
+    public Integer remove(Integer id) {
+        userEntityMap.remove(id);
+        return id;
+    }
+
 }

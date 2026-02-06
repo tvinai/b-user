@@ -42,4 +42,9 @@ public class UserController {
 
     }
 
+    @DeleteMapping("/{userId}")
+    public Integer remove(@PathVariable Integer userId) {
+        return userRepository.remove(userId);
+    }
+
 }

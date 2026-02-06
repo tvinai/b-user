@@ -10,4 +10,5 @@ public interface UserRepository {
     public List<UserEntity> findAll();
     public Integer add(UserEntity userEntity);
     public Integer update(UserEntity userEntity);
+    public Integer remove(Integer id);
 }
