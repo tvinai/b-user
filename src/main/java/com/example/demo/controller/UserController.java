@@ -24,6 +24,12 @@ public class UserController {
 
     @GetMapping("/{userId}")
     public UserEntity getUserById(@PathVariable Integer userId) {
+
+        UserEntity userEntity = userRepository.getById(userId);
+        if (userEntity == null) {
+            throw new UserNotFoundException("78", "User not found");
+        }
+
         return userRepository.getById(userId);
     }
 
@@ -36,6 +42,11 @@ public class UserController {
     @PutMapping("/{userId}")
     public Integer update(@PathVariable Integer userId,
                           @RequestBody UserRequest userRequest) {
+
+        UserEntity userEntity = userRepository.getById(userId);
+        if (userEntity == null) {
+            throw new UserNotFoundException("78", "User not found");
+        }
 
         UserEntity newUserEntity = UserEntityMapper.from(userRequest);
         newUserEntity.setId(userId);
