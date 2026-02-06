@@ -32,4 +32,14 @@ public class UserController {
         return userRepository.add(userEntity);
     }
 
+    @PutMapping("/{userId}")
+    public Integer update(@PathVariable Integer userId,
+                          @RequestBody UserRequest userRequest) {
+
+        UserEntity newUserEntity = UserEntityMapper.from(userRequest);
+        newUserEntity.setId(userId);
+        return userRepository.update(newUserEntity);
+
+    }
+
 }
