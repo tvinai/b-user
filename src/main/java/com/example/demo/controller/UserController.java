@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.mapper.UserEntityMapper;
 import com.example.demo.model.entity.UserEntity;
 import com.example.demo.model.request.UserRequest;
@@ -44,6 +45,12 @@ public class UserController {
 
     @DeleteMapping("/{userId}")
     public Integer remove(@PathVariable Integer userId) {
+
+        UserEntity userEntity = userRepository.getById(userId);
+        if (userEntity == null) {
+            throw new UserNotFoundException("78", "User not found");
+        }
+
         return userRepository.remove(userId);
     }
 
