@@ -1,12 +1,11 @@
 package com.example.demo.controller;
 
+import com.example.demo.mapper.UserEntityMapper;
 import com.example.demo.model.entity.UserEntity;
+import com.example.demo.model.request.UserRequest;
 import com.example.demo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,4 +25,11 @@ public class UserController {
     public UserEntity getUserById(@PathVariable Integer userId) {
         return userRepository.getById(userId);
     }
+
+    @PostMapping
+    public Integer save(@RequestBody UserRequest userRequest) {
+        UserEntity userEntity = UserEntityMapper.from(userRequest);
+        return userRepository.add(userEntity);
+    }
+
 }
